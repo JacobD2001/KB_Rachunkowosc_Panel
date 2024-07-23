@@ -1,0 +1,19 @@
+<!-- src/app/components/sheet-data/sheet-data.component.html -->
+<ng-container *if="sheetData.length > 0; else noData">
+    <table>
+      <thead>
+        <tr>
+          <th *for="let key of Object.keys(sheetData[0])">{{ key }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *for="let row of sheetData">
+          <td *for="let key of Object.keys(row)">{{ row[key] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+  <ng-template #noData>
+    <p>No data available.</p>
+  </ng-template>
+  
