@@ -1,19 +1,23 @@
-<!-- src/app/components/sheet-data/sheet-data.component.html -->
-<ng-container *if="sheetData.length > 0; else noData">
-    <table>
-      <thead>
+<ng-container *ngIf="headers.length > 0">
+  <table>
+    <thead>
+      <tr>
+        @for (header of headers; track header) {
+          <th>{{ header }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of rows; track row.id) { 
         <tr>
-          <th *for="let key of Object.keys(sheetData[0])">{{ key }}</th>
+          @for (header of headers; track header) {
+            <td>{{ row[headers.indexOf(header)] }}</td>
+          }
         </tr>
-      </thead>
-      <tbody>
-        <tr *for="let row of sheetData">
-          <td *for="let key of Object.keys(row)">{{ row[key] }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </ng-container>
-  <ng-template #noData>
-    <p>No data available.</p>
-  </ng-template>
-  
+      }
+    </tbody>
+  </table>
+</ng-container>
+<ng-template #noData>
+  <p>No data available.</p>
+</ng-template>
